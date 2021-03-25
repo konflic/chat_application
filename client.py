@@ -1,7 +1,8 @@
 import sys
 
-from PySide2.QtWidgets import QApplication, QMainWindow, QPushButton, QListWidget, QVBoxLayout, QWidget, QLabel, \
-    QLineEdit
+from PySide2.QtGui import QIcon
+from PySide2.QtWidgets import QApplication, QMainWindow, \
+    QPushButton, QListWidget, QVBoxLayout, QWidget, QLabel, QLineEdit
 from backend.client import Client
 
 
@@ -36,6 +37,11 @@ class ClientGUI(QMainWindow):
         widget = QWidget()
         widget.setLayout(self.layout)
         self.setCentralWidget(widget)
+        self.setIcon()
+
+    def setIcon(self):
+        appIcon = QIcon("icons/client.png")
+        self.setWindowIcon(appIcon)
 
     def connect_to_server(self):
         ip, port = self.server_address.text().split(":")
@@ -57,6 +63,7 @@ class ClientGUI(QMainWindow):
 
     def disconnect(self):
         self.client.connection.close()
+        self.set_disconnected()
         self.setWindowTitle("Disconnected!")
 
     def add_message(self, message):

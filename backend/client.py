@@ -4,11 +4,11 @@ import threading
 
 class Client:
 
-    def __init__(self, ip, port, name=None, client_gui=None):
+    def __init__(self, ip, port, name="", client_gui=None):
         self.connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.connection.connect((ip, int(port)))
         self.client_gui = client_gui
-        if name is None or not isinstance(name, str):
+        if not isinstance(name, str) or name == "":
             raise Exception(f"Empty or not string username not allowed! Got: {name}")
         self.connection.send(name.encode("utf-8"))
 
@@ -39,3 +39,10 @@ class Client:
         message_text = self.client_gui.message_box.text()
         self.connection.send(self.__decoder(message_text))
         self.client_gui.message_box.clear()
+
+
+if __name__ == "__main__":
+    host = input("HOST: ")
+    port = input("PORT: ")
+    name = input("Username: ")
+    client = Client(host, int(port), name)

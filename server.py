@@ -1,6 +1,7 @@
 import sys
 import random
 
+from PySide2.QtGui import QIcon
 from PySide2.QtWidgets import QApplication, QMainWindow, QPushButton, QListWidget, QVBoxLayout, QWidget, QLabel
 from backend.server import Server
 
@@ -24,6 +25,11 @@ class ServerGUI(QMainWindow):
         widget = QWidget()
         widget.setLayout(self.layout)
         self.setCentralWidget(widget)
+        self.setIcon()
+
+    def setIcon(self):
+        appIcon = QIcon("icons/server.png")
+        self.setWindowIcon(appIcon)
 
     def stop_server(self):
         self.server.stop_server()
