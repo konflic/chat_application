@@ -1,3 +1,6 @@
-from collections import namedtuple
+class User:
 
-User = namedtuple('User', 'username, socket_id, connection')
+    def __init__(self, username, socket_id, connection):
+        self.username = username
+        self.socket_id = socket_id
+        self.connection = connection
